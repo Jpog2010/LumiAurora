@@ -805,6 +805,17 @@
 		loadstring += i <= limit ? "█" : "░"
 	return "\[[loadstring]\]"
 
+/proc/new_sql_sanitize_text(var/text)
+	text = replacetext(text, "'", "")
+	text = replacetext(text, ";", "")
+	text = replacetext(text, "&", "")
+	text = replacetext(text, "`", "")
+	return text
+
+/proc/remove_all_spaces(text)
+	text = replacetext(text, " ", "")
+	return text
+
 // Adds -s or -es to the very last word of given string
 /proc/pluralize_word(text, check_plural = FALSE)
 	var/l = length(text)

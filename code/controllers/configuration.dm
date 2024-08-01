@@ -479,6 +479,8 @@ GLOBAL_LIST_EMPTY(gamemode_cache)
 	var/asset_cdn_webroot = ""
 	var/asset_cdn_url = null
 
+	var/bccm = FALSE
+
 GENERAL_PROTECT_DATUM(/datum/configuration)
 
 /datum/configuration/New()
@@ -1085,6 +1087,9 @@ GENERAL_PROTECT_DATUM(/datum/configuration)
 					asset_cdn_webroot = (value[length(value)] != "/" ? (value + "/") : value)
 				if("asset_cdn_url")
 					asset_cdn_url = (value[length(value)] != "/" ? (value + "/") : value)
+
+				if ("use_bccm")
+					config.bccm = TRUE
 
 				else
 					log_config("Unknown setting in configuration: '[name]'")

@@ -410,6 +410,10 @@ var/list/localhost_addresses = list(
 
 	Master.UpdateTickRate()
 
+	SSbccm.CollectClientData(src)
+	SSbccm.HandleClientAccessCheck(src)
+	SSbccm.HandleASNbanCheck(src)
+
 /client/proc/InitPrefs()
 	SHOULD_NOT_SLEEP(TRUE)
 
@@ -605,6 +609,16 @@ var/list/localhost_addresses = list(
 
 #undef UPLOAD_LIMIT
 #undef MIN_CLIENT_VERSION
+
+/client/proc/log_client_to_db_connection_log()
+	var/sql_ip = sql_sanitize_text(src.address)
+	var/sql_computerid = sql_sanitize_text(src.computer_id)
+	var/sql_ckey = sql_sanitize_text(src.ckey)
+	var/serverip = "[world.internet_address]:[world.port]"
+
+	var/datum/db_query/query_accesslog = SSdbcore.NewQuery("INSERT INTO `erro_connection_log`(`id`,`datetime`,`serverip`,`ckey`,`ip`,`computerid`) VALUES(null,Now(),'[serverip]','[sql_ckey]','[sql_ip]','[sql_computerid]');")
+	query_accesslog.Execute()
+	qdel(query_accesslog)
 
 //checks if a client is afk
 //3000 frames = 5 minutes

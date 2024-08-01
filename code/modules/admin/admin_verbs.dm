@@ -108,7 +108,10 @@ var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
 	/client/proc/jobbans,
 	/client/proc/warning_panel,
-	/client/proc/stickybanpanel
+	/client/proc/stickybanpanel,
+	/client/proc/ban_panel,
+	/client/proc/BCCM_toggle,
+	/client/proc/BCCM_WhitelistPanel
 	)
 var/list/admin_verbs_sounds = list(
 	/client/proc/play_local_sound,
@@ -173,7 +176,8 @@ var/list/admin_verbs_server = list(
 	/client/proc/cmd_ss_panic,
 	/client/proc/configure_access_control,
 	/datum/admins/proc/togglehubvisibility, //toggles visibility on the BYOND Hub
-	/client/proc/force_away_mission
+	/client/proc/force_away_mission,
+	/client/proc/BCCM_ASNPanel
 	)
 var/list/admin_verbs_debug = list(
 	/client/proc/getruntimelog,                     // allows us to access runtime logs to somebody,
